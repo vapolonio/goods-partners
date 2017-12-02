@@ -41,6 +41,8 @@ router.get('/callback', (req, res) => {
         .end((err, response) => {
 
             access_token = response.body.access_token;
+
+            execute_api('balance');
             res.send('<script>window.close();</script>');
         });
 });
@@ -53,5 +55,51 @@ router.get('/getCoin', (req, res) => {
             res.status(200).json(response.body);
         });
 });
+
+let resources = {
+    balance: {
+        method: 'get',
+        path: '/accounts/v1/balance'
+    },
+    balance_history: {
+        method: 'get',
+        path: '/accounts/v1/balance-history?date_from=20170623'
+    },
+    history: {
+        method: 'get',
+        path: '/accounts/v1/transaction-history'
+    }
+}
+
+let execute_api = name => {
+    let resource = resources[name];
+    
+    let action =
+        request
+            [resource.method](`${api_url}${resource.path}`)
+            .set('developer-key', developer_key)
+            .set('Authorization', access_token);
+
+    if ('headers' in resource)
+        for (let key in resource.headers)
+            action.set(key, resource.headers[key]);
+
+    if ('data' in resource)
+        action.send(resource.data);
+
+
+    action.end((err, res) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log(res.body);
+
+            if ('security_message' in res.body) {
+                resources.tef_confirm.headers.security_response = res.body.security_message
+            }
+        }
+    });
+};
 
 module.exports = router;
