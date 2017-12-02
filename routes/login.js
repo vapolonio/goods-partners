@@ -1,9 +1,7 @@
 import express from 'express'
 
-
-/* GET home page. */
+let router = express.Router();
 let request = require('superagent');
-var router = express.Router();
 
 const url = `http://localhost:3000/`;
 
@@ -14,21 +12,20 @@ let developer_key = '28f955c90b3a2940134ff1a970050f569a87facf';
 let secret_key = 'dd385cd0b59c013560400050569a7fac';
 let access_token = '';
 
-router.get('/', function(req, res, next) {
-    // res.status(200).json({ data: 'Hello World' });
-    res.redirect('/oauth');
-});
-
-router.get('/favicon.ico', function(req, res) {
-    res.status(204);
-});
 
 router.get('/oauth', (req, res) => {
     let url = `${auth_url}/OriginalConnect?scopes=account&callback_url=${auth_callback_url}&callback_id=1&developer_key=${developer_key}`;
     res.redirect(url);
 });
 
+
 router.get('/callback', (req, res) => {
+    show(
+        'Callback oauth received',
+        req.query,
+        'Requesting access token'
+    );
+
     request
         .post(`${auth_url}/OriginalConnect/AccessTokenController`)
         .set('Content-Type', 'application/json')
@@ -39,18 +36,15 @@ router.get('/callback', (req, res) => {
             secret_key
         })
         .end((err, response) => {
+            show(
+                'Response', response.statusMessage, response.statusCode,
+                'Headers', response.headers,
+                'Content', response.text
+            );
 
             access_token = response.body.access_token;
-            res.send('<script>window.close();</script>');
-        });
-});
 
-router.get('/getCoin', (req, res) => {
-    request
-        .get('http://api.promasters.net.br/cotacao/v1/valores')
-        .end((err, response) => {
-            console.log(response.body);
-            res.status(200).json(response.body);
+            res.send('<script>window.close();</script>');
         });
 });
 
