@@ -1,5 +1,6 @@
 import express from 'express'
 
+var PythonShell = require('python-shell');
 let path = require('path');
 let request = require('superagent');
 let originalApi = require('../controller/originalApiController');
@@ -34,10 +35,6 @@ let resources = {
     wallet_v1: {
         method: 'get',
         path: '/investments/v1/portfolio-summary'
-    },
-    wallet_v2: {
-        method: 'get',
-        path: '/investments/v1/funds/transaction-history'
     }
 }
 
@@ -73,7 +70,7 @@ let execute_api = name => {
 };
 
 
-router.get('/getHistory', (req, res) => {
+router.get('/getTransactionHistory', (req, res) => {
     access_token = originalApi.getAccessToken();
     execute_api('history');
     res.end();
@@ -97,9 +94,10 @@ router.get('/getWalletv1', (req, res) => {
     res.end();
 });
 
-router.get('/getWalletv2', (req, res) => {
-    access_token = originalApi.getAccessToken();
-    execute_api('wallet_v2');
+router.get('/prediction', (req, res) => {
+    PythonShell('./../model/predict.py', options, function(err, results){
+        console.log(results);
+    });
     res.end();
 });
 
