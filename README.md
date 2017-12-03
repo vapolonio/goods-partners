@@ -27,3 +27,7 @@
 ## Instalar requerimentos para o modelo preditivo
 
 `pip install -r path/to/requirements.txt`
+
+
+# Links
+Vídeo do app: https://drive.google.com/file/d/1esLfBzurp15HTH6ZorqROOllQWt9gDxc/view
