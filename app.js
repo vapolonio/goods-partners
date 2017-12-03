@@ -1,4 +1,3 @@
-
 import express from 'express'
 import path from 'path'
 import logger from 'morgan'
@@ -9,16 +8,29 @@ import fs from 'fs'
 let app = express();
 
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", process.env.CLIENT_ADDRESS);
+    let splittedAddress = process.env.CLIENT_ADDRESS.split(',')
+    if (splittedAddress.length === 1) {
+        res.header("Access-Control-Allow-Origin", process.env.CLIENT_ADDRESS);
+    } else {
+        // Assume array
+        // Check if request array is on the list of allowed hosts
+        let requestingOrigin = req.headers.origin
+        if ( splittedAddress.filter( el => ( el === requestingOrigin ) ).length > 0 ) {
+            // And then set it as the allowed requester
+            res.header("Access-Control-Allow-Origin", requestingOrigin);
+        }
+    }
+
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, X-Authorization, Authorization, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
     next();
 });
+
 
 fs.readdirSync(__dirname + '/routes')
 .forEach((file) => {
@@ -31,10 +43,9 @@ fs.readdirSync(__dirname + '/routes')
   }
 });
 
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
