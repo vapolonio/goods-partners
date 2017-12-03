@@ -15,8 +15,8 @@ let developer_key = '28f955c90b3a2940134ff1a970050f569a87facf';
 let secret_key = 'dd385cd0b59c013560400050569a7fac';
 
 router.get('/', function(req, res, next) {
-    res.status(200).json({ data: 'Hello World' });
-    // res.redirect('/oauth');
+    //res.status(200).json({ data: 'Hello World' });
+    res.render('./../public/index.html');
 });
 
 router.get('/favicon.ico', function(req, res) {
