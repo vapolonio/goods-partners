@@ -12,7 +12,7 @@
 
 ### Enviar histórico de transações ao fireBase `(/original/transaction)`
 
-### Algoritmo de predições `(/original/predictive)`
+### Algoritmo de predições `(/model)`
 
 # Requerimentos
 
