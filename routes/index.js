@@ -44,7 +44,7 @@ router.get('/callback', (req, res) => {
             console.log('TOKEN: ' + originalApi.getAccessToken());
             res.send('<script>window.close();</script>');
         });
-});
+}); 
 
 router.get('/getCoin', (req, res) => {
     request
