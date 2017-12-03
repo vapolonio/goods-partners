@@ -18,7 +18,8 @@
     "request": "2.81.0",
     "rx": "^4.1.0",
     "rx-node": "^1.0.2",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "superagent": "^3.8.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
