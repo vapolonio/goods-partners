@@ -1,9 +1,9 @@
-import PythonShell from 'python-shell';
+import Shell from 'shelljs';
 
 export function runModel(){
-    PythonShell.run('../models/classifier.py', function (err) {
-        if (err) throw err;
-        console.log('finished');
-    });
-}
+    let options = {
+        mode: 'text'
+      };
 
+    Shell.exec('python ./controller/customer_classifier.py');
+}

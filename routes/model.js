@@ -6,7 +6,10 @@ import { runModel } from '../controller/runClassifier';
 var router = express.Router();
 
 router.get('/', (req, res) => {
+    console.log('pre-model');
     runModel();
-    // let url = `${auth_url}/OriginalConnect?scopes=account&callback_url=${auth_callback_url}&callback_id=1&developer_key=${developer_key}`;
-    // res.redirect(url);
+    res.status(200).json('running predict');
+
 });
+
+module.exports = router;
