@@ -1,33 +1,34 @@
 # Digital Goods
 
-### Atenticação `(/oauth)`
+Solução desenvolvida durante o hackathon do Banco Original com o tema: desenvolver soluções consumindo as APIs do Open Bank Original e Machine Learning. A proposta visa incluir indivíduos que não possuem acesso a crédito a um modelo de crédito para gastos controlados, focado no consumo dos chamados "digital goods".
 
-### Recuperar saldo `(/original/getBalance)`
+## Time:
+- Alexsandro Cunha
+- Felipe Fregulhia
+- Lidia Grigorini
+- Victor Apolonio
+- Vinicius Min Soo
+## Original Partner's
+API e landing page para cadastro de parcerias.
 
-### Recuperar histórico de saldo `(/original/getBalanceHistory)`
+## Original Good's
+Aplicativo para acompanhamento do cartão e participação nas promoções cadastradas. [Videos de demonstração]( https://drive.google.com/file/d/1esLfBzurp15HTH6ZorqROOllQWt9gDxc/view)
+### EndPoints  
+Autenticação `/oauth`<br>
+Recuperar saldo `/original/getBalance`<br>
+Recuperar histórico de saldo `/original/getBalanceHistory`<br>
+Recuperar histórico de transações `/original/getTransactionHistory`
+Recuperar lista de investimento `/original/getWalletv1`<br>
+Enviar histórico de transações ao fireBase `/original/transaction`
+Chamada para predição do consumo `/model`
 
-### Recuperar histórico de transações `(/original/getTransactionHistory)`
+## Requerimentos
 
-### Recuperar lista de investimento `(/original/getWalletv1)`
-
-### Enviar histórico de transações ao fireBase `(/original/transaction)`
-
-### Algoritmo de predições `(/model)`
-
-# Requerimentos
-
-## Instalar requerimentos para o back-end
-
-`npm install --save-dev babel-cli`
-
-`npm install --save-dev babel-preset-es2015 babel-preset-stage-2`
-
+### Back-end
+`npm install --save-dev babel-cli`<br>
+`npm install --save-dev babel-preset-es2015 babel-preset-stage-2`<br>
 `npm install`
 
-## Instalar requerimentos para o modelo preditivo
-
+### Modelo preditivo
 `pip install -r path/to/requirements.txt`
 
-
-# Links
-Vídeo do app: https://drive.google.com/file/d/1esLfBzurp15HTH6ZorqROOllQWt9gDxc/view
