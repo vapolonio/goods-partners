@@ -17,9 +17,9 @@ Aplicativo para acompanhamento do cartão e participação nas promoções cadas
 Autenticação `/oauth`<br>
 Recuperar saldo `/original/getBalance`<br>
 Recuperar histórico de saldo `/original/getBalanceHistory`<br>
-Recuperar histórico de transações `/original/getTransactionHistory`
+Recuperar histórico de transações `/original/getTransactionHistory`<br>
 Recuperar lista de investimento `/original/getWalletv1`<br>
-Enviar histórico de transações ao fireBase `/original/transaction`
+Enviar histórico de transações ao fireBase `/original/transaction`<br>
 Chamada para predição do consumo `/model`
 
 ## Requerimentos
